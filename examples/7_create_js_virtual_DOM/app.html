@@ -1,0 +1,31 @@
+
+
+<script>
+let name = ""; let inputField; let updateDiv; let vDom;
+
+function createVDom(){
+    return [['input', name, handle],
+['div', `Hello, ${name}!`]]
+}
+
+function handle(){name = inputField.value}
+function updateDom(){
+    vDom = createVDom()
+    inputField= convert(vDom[0])
+    updateDiv= convert(vDom[1])
+    document.body.replaceChildren(inputField, updateDiv)
+}
+function convert(node){
+    const elm = document.createElement(node[0])
+    if(elm.textContent)
+   { elm.textContent = node[1]}
+   if(elm.value){
+    elm.value= node[1]
+   }
+   if( elm.oninput){
+    elm.oninput = node[2]
+   }
+    return elm
+}
+setInterval(updateDom, 15)
+</script>

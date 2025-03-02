@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Event Example</title>
+</head>
+<body>
+
+    <input type="text" id="myInput">
+    <div id="myDiv"></div>
+
+    <script>
+        let inputField = document.querySelector("#myInput");
+        let displayDiv = document.querySelector("#myDiv");
+
+        inputField.oninput = function () {
+            displayDiv.textContent = inputField.value;
+        };
+    </script>
+
+</body>
+</html>

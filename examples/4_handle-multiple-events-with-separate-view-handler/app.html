@@ -1,0 +1,27 @@
+<input id="myInput" type="text">
+<div id="myDiv"></div>
+
+<script>
+  let message = "Hello, this is my text!";
+  let inputField = document.querySelector("#myInput");
+  let displayDiv = document.querySelector("#myDiv");
+
+  function updateView() {
+    displayDiv.textContent = message;
+  }
+
+  function handleInput() {
+    message = inputField.value;
+    updateView();
+  }
+
+  function handleFocus() {
+    message = "Input field is focused!";
+    updateView();
+  }
+
+  inputField.oninput = handleInput;
+  inputField.onfocus = handleFocus;
+
+  updateView(); // Initialize view
+</script>

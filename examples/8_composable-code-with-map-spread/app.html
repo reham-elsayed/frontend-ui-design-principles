@@ -1,0 +1,47 @@
+
+
+<script>
+    let name = ""; let inputField; let updateDiv; let vDom; let elems;
+    let posts = ["Ahmed", "Reham", "Faride", "Ali"]; 
+
+function PostsCreator(msg){
+return ['div', msg]
+}
+
+    function createVDom(){
+        return [['input', name, handle],
+    ['div', `Hello, ${name}!`],
+...posts.map(PostsCreator)
+]
+    }
+
+function handle(e){posts.push(e.target.value)}
+
+    /*
+    Adding to our list of arrays each
+new element we want to see in
+order on our page (elems)
+- They’ll show up on the page
+exactly as they’re placed in code
+
+    */
+    function updateDom(){
+        vDom = createVDom()
+       elems= vDom.map(convert)
+        document.body.replaceChildren(...elems)
+    }
+    function convert(node){
+        const elm = document.createElement(node[0])
+        if(elm.textContent)
+       { elm.textContent = node[1]}
+       if(elm.value){
+        elm.value= node[1]
+       }
+       if( elm.oninput){
+        elm.oninput = node[2]
+       }
+        return elm
+    }
+    setInterval(updateDom, 15)
+    </script>
+    

@@ -1,0 +1,56 @@
+<html>
+    
+<head></head>
+<body>
+    <script>
+        function createState() {
+          let data = { name: 'a' }; // Private state inside closure
+      
+          return {
+            get: () => data, // Getter function to access state
+            set: (label, value) => {
+              data[label] = data[label] + value; // Modify state
+              updateDom(); // Trigger re-render
+            }
+          };
+        }
+      
+        const state = createState(); // Creates a closure for data
+      
+        function createVDom() {
+          const { name } = state.get(); // Access state via closure
+          return [
+            ['input', name, handle], // Pass input value & event handler
+            ['div', `Hello, ${name}!`] // Display updated name
+          ];
+        }
+      
+        function handle(e) {
+          state.set('name', e.target.value); // Update state via closure
+        }
+      
+        function updateDom() {
+          vDom = createVDom();
+          elems = vDom.map(convert);
+          document.body.replaceChildren(...elems);
+        }
+      
+        function convert(node) {
+          const elm = document.createElement(node[0]);
+          if (typeof node[1] === 'string') {
+            elm.textContent = node[1];
+          } else {
+            elm.value = node[1]; // For input field
+          }
+          if (node[2]) {
+            elm.oninput = node[2]; // Attach event listener if present
+          }
+          return elm;
+        }
+      
+        updateDom(); // Initial render
+      </script>
+</body>
+
+</html>
+  

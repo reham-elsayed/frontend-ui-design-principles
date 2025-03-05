@@ -1,0 +1,42 @@
+
+
+<script>
+    let name = {name : ''}; let vDom; let elems;
+
+function updateData(label, value){
+    data[label]= value;
+    updateDom()
+}
+
+    function createVDom(){
+        return [['input', name, handle],
+    ['div', `Hello, ${name}!`],
+
+]
+    }
+
+function handle(e){updateData('name', e.target.value)}
+
+ 
+    function updateDom(){
+        vDom = createVDom()
+       elems= vDom.map(convert)
+        document.body.replaceChildren(...elems)
+    }
+    function convert(node){
+        const elm = document.createElement(node[0])
+        if(elm.textContent)
+       { elm.textContent = node[1]}
+       if(elm.value){
+        elm.value= node[1]
+       }
+       if( elm.oninput){
+        elm.oninput = node[2]
+       }
+        return elm
+    }
+    updateDom()
+    //no need for set intervals we will only update when data change
+    //setInterval(updateDom, 15)
+    </script>
+    
